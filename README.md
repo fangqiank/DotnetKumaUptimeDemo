@@ -1,6 +1,6 @@
 # DotnetKumaUptimeDemo
 
-.NET 10 ASP.NET Core demo app integrated with [Uptime Kuma](https://github.com/louislam/uptime-kuma) for uptime monitoring, featuring custom health checks with failure/recovery simulation.
+.NET 10 ASP.NET Core demo app integrated with [Uptime Kuma](https://github.com/louislam/uptime-kuma) for uptime monitoring, featuring custom health checks with failure/recovery simulation, and a WPF desktop dashboard client.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ docker-compose up --build
 ```
 
 - API: http://localhost:5000
-- Uptime Kuma: http://localhost:7001
+- Uptime Kuma: http://localhost:17001
 
 ### Local Development
 
@@ -26,6 +26,14 @@ dotnet run --project DotnetKumaUptimeDemo
 ```
 
 - API: http://localhost:5192
+
+### WPF Dashboard
+
+```bash
+dotnet run --project DotnetKumaUptimeDemo.Wpf
+```
+
+Connects to API at `http://localhost:5000`. Auto-refreshes every 5 seconds.
 
 ### Aspire Orchestration
 
@@ -38,6 +46,7 @@ dotnet run --project DotnetKumaUptimeDemo.AppHost
 | Project | Description |
 |---------|-------------|
 | **DotnetKumaUptimeDemo** | Main web API with health checks and simulation endpoints |
+| **DotnetKumaUptimeDemo.Wpf** | WPF desktop dashboard (MVVM, auto-refresh) |
 | **DotnetKumaUptimeDemo.AppHost** | .NET Aspire orchestrator |
 | **DotnetKumaUptimeDemo.ServiceDefaults** | Shared service defaults (OpenTelemetry, resilience, service discovery) |
 
@@ -45,7 +54,7 @@ dotnet run --project DotnetKumaUptimeDemo.AppHost
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/health` | Full health report (JSON) |
+| GET | `/health` | Full health report (200=Healthy, 503=Degraded/Unhealthy) |
 | GET | `/health/database` | Database-tagged checks |
 | GET | `/health/cache` | Cache-tagged checks |
 | GET | `/api/users` | Sample API (respects health state) |
@@ -55,20 +64,21 @@ dotnet run --project DotnetKumaUptimeDemo.AppHost
 
 ## Configure Uptime Kuma
 
-1. Open http://localhost:7001 and create admin account
+1. Open http://localhost:17001 and create admin account
 2. Add a new monitor:
    - Type: HTTP(s)
    - URL: `http://dotnet-kuma-api:8080/health` (within Docker network)
+   - Accepted Status Codes: `200-299` (503 = DOWN)
 3. (Optional) Set up notification channels
 4. Create a status page
 
 ## Tech Stack
 
-- .NET 10 / ASP.NET Core
+- .NET 10 / ASP.NET Core / WPF
+- CommunityToolkit.Mvvm (MVVM)
 - .NET Aspire 13.1
 - Scalar (API documentation)
-- StackExchange.Redis
-- Npgsql (PostgreSQL)
+- StackExchange.Redis / Npgsql
 - OpenTelemetry
 - Uptime Kuma 2
 - Docker Compose

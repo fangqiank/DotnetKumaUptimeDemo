@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 900" width="1300" height="900">
   <defs>
     <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
@@ -25,6 +25,10 @@
       <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="roseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f43f5e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e11d48;stop-opacity:1" />
+    </linearGradient>
 
     <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#22c55e"/>
@@ -44,6 +48,9 @@
     <marker id="arrowSky" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#0ea5e9"/>
     </marker>
+    <marker id="arrowRose" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f43f5e"/>
+    </marker>
   </defs>
 
   <style>
@@ -53,6 +60,7 @@
     .flow-line-purple { stroke-dasharray: 8, 4; animation: dash-flow-purple 0.5s linear infinite; }
     .flow-line-teal { stroke-dasharray: 8, 4; animation: dash-flow-teal 0.5s linear infinite; }
     .flow-line-sky { stroke-dasharray: 8, 4; animation: dash-flow-sky 0.5s linear infinite; }
+    .flow-line-rose { stroke-dasharray: 8, 4; animation: dash-flow-rose 0.5s linear infinite; }
 
     @keyframes dash-flow-green { to { stroke-dashoffset: -12; } }
     @keyframes dash-flow-orange { to { stroke-dashoffset: -12; } }
@@ -60,44 +68,83 @@
     @keyframes dash-flow-purple { to { stroke-dashoffset: -12; } }
     @keyframes dash-flow-teal { to { stroke-dashoffset: -12; } }
     @keyframes dash-flow-sky { to { stroke-dashoffset: -12; } }
+    @keyframes dash-flow-rose { to { stroke-dashoffset: -12; } }
   </style>
 
   <!-- White background -->
-  <rect width="1200" height="850" fill="#ffffff"/>
+  <rect width="1300" height="900" fill="#ffffff"/>
 
   <!-- Grid -->
   <g opacity="0.15">
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#94a3b8" stroke-width="0.5"/>
     </pattern>
-    <rect width="1200" height="850" fill="url(#grid)"/>
+    <rect width="1300" height="900" fill="url(#grid)"/>
   </g>
 
   <!-- Title -->
-  <g transform="translate(600, 40)">
+  <g transform="translate(650, 40)">
     <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">DotnetKumaUptimeDemo 系统架构图 / System Architecture</text>
   </g>
 
   <!-- ==================== Docker Network Box ==================== -->
-  <rect x="320" y="75" width="850" height="530" rx="16" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8,4"/>
-  <g transform="translate(745, 72)">
+  <rect x="420" y="75" width="850" height="530" rx="16" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8,4"/>
+  <g transform="translate(845, 72)">
     <rect x="-80" y="-12" width="160" height="22" rx="4" fill="#f8fafc"/>
     <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#64748b" font-weight="bold">Docker Network (bridge)</text>
   </g>
 
   <!-- ==================== Browser ==================== -->
-  <g transform="translate(50, 140)">
-    <rect x="0" y="0" width="220" height="120" rx="12" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
-    <rect x="0" y="0" width="220" height="35" rx="12" fill="url(#skyGradient)"/>
-    <rect x="0" y="20" width="220" height="15" fill="url(#skyGradient)"/>
-    <text x="110" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Browser / 浏览器</text>
-    <text x="110" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#0284c7">localhost:5000 (API)</text>
-    <text x="110" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#0284c7">localhost:7001 (Kuma)</text>
-    <text x="110" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">HTTP Client</text>
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="200" height="110" rx="12" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#skyGradient)"/>
+    <rect x="0" y="20" width="200" height="15" fill="url(#skyGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Browser / 浏览器</text>
+    <text x="100" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#0284c7">localhost:5000 (API)</text>
+    <text x="100" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#0284c7">localhost:17001 (Kuma)</text>
+    <text x="100" y="96" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">HTTP Client</text>
+  </g>
+
+  <!-- ==================== WPF Desktop Client ==================== -->
+  <g transform="translate(50, 290)">
+    <rect x="0" y="0" width="310" height="250" rx="12" fill="#fff1f2" stroke="#f43f5e" stroke-width="2"/>
+    <rect x="0" y="0" width="310" height="35" rx="12" fill="url(#roseGradient)"/>
+    <rect x="0" y="20" width="310" height="15" fill="url(#roseGradient)"/>
+    <text x="155" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">WPF Desktop Client / 桌面客户端</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="130" height="50" rx="6" fill="#ffffff" stroke="#fecdd3" stroke-width="1"/>
+      <text x="65" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f43f5e">MVVM</text>
+      <text x="65" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">CommunityToolkit</text>
+      <text x="65" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">ObservableObject</text>
+    </g>
+    <g transform="translate(165, 45)">
+      <rect x="0" y="0" width="130" height="50" rx="6" fill="#ffffff" stroke="#fecdd3" stroke-width="1"/>
+      <text x="65" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f43f5e">ApiService</text>
+      <text x="65" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">HttpClient</text>
+      <text x="65" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">REST Calls</text>
+    </g>
+    <g transform="translate(15, 107)">
+      <rect x="0" y="0" width="130" height="50" rx="6" fill="#ffffff" stroke="#fecdd3" stroke-width="1"/>
+      <text x="65" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f43f5e">Dashboard</text>
+      <text x="65" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Health Status</text>
+      <text x="65" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Auto Refresh 5s</text>
+    </g>
+    <g transform="translate(165, 107)">
+      <rect x="0" y="0" width="130" height="50" rx="6" fill="#ffffff" stroke="#fecdd3" stroke-width="1"/>
+      <text x="65" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f43f5e">Simulate</text>
+      <text x="65" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Failure Control</text>
+      <text x="65" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Toggle Buttons</text>
+    </g>
+
+    <text x="155" y="180" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">.NET 10 WPF</text>
+    <text x="155" y="198" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">Models | ViewModels | Views</text>
+    <text x="155" y="216" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">Converters | Services</text>
+    <text x="155" y="236" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">→ localhost:5000</text>
   </g>
 
   <!-- ==================== Uptime Kuma ==================== -->
-  <g transform="translate(380, 100)">
+  <g transform="translate(480, 100)">
     <rect x="0" y="0" width="280" height="160" rx="12" fill="#f0fdf4" stroke="#42b883" stroke-width="2"/>
     <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#tealGradient)"/>
     <rect x="0" y="20" width="280" height="15" fill="url(#tealGradient)"/>
@@ -115,11 +162,11 @@
     </g>
 
     <text x="140" y="118" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">louislam/uptime-kuma:2</text>
-    <text x="140" y="138" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">port 7001 → 3001</text>
+    <text x="140" y="138" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">port 17001 → 3001</text>
   </g>
 
   <!-- ==================== .NET API ==================== -->
-  <g transform="translate(380, 330)">
+  <g transform="translate(480, 330)">
     <rect x="0" y="0" width="280" height="250" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2"/>
     <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#purpleGradient)"/>
     <rect x="0" y="20" width="280" height="15" fill="url(#purpleGradient)"/>
@@ -129,7 +176,7 @@
       <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
       <text x="57" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#a855f7">/health</text>
       <text x="57" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Health Checks</text>
-      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">JSON Report</text>
+      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">200 / 503</text>
     </g>
     <g transform="translate(150, 45)">
       <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
@@ -156,7 +203,7 @@
   </g>
 
   <!-- ==================== ServiceDefaults ==================== -->
-  <g transform="translate(760, 330)">
+  <g transform="translate(860, 330)">
     <rect x="0" y="0" width="280" height="120" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
     <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#orangeGradient)"/>
     <rect x="0" y="20" width="280" height="15" fill="url(#orangeGradient)"/>
@@ -177,7 +224,7 @@
   </g>
 
   <!-- ==================== AppHost ==================== -->
-  <g transform="translate(760, 100)">
+  <g transform="translate(860, 100)">
     <rect x="0" y="0" width="280" height="120" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
     <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#blueGradient)"/>
     <rect x="0" y="20" width="280" height="15" fill="url(#blueGradient)"/>
@@ -199,7 +246,7 @@
 
   <!-- ==================== Health Check Components ==================== -->
   <!-- Postgres -->
-  <g transform="translate(350, 640)">
+  <g transform="translate(450, 670)">
     <rect x="0" y="0" width="160" height="80" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
     <rect x="0" y="0" width="160" height="30" rx="10" fill="url(#blueGradient)"/>
     <rect x="0" y="16" width="160" height="14" fill="url(#blueGradient)"/>
@@ -209,7 +256,7 @@
   </g>
 
   <!-- Redis -->
-  <g transform="translate(540, 640)">
+  <g transform="translate(640, 670)">
     <rect x="0" y="0" width="160" height="80" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
     <rect x="0" y="0" width="160" height="30" rx="10" fill="url(#greenGradient)"/>
     <rect x="0" y="16" width="160" height="14" fill="url(#greenGradient)"/>
@@ -219,7 +266,7 @@
   </g>
 
   <!-- API Self -->
-  <g transform="translate(730, 640)">
+  <g transform="translate(830, 670)">
     <rect x="0" y="0" width="160" height="80" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
     <rect x="0" y="0" width="160" height="30" rx="10" fill="url(#orangeGradient)"/>
     <rect x="0" y="16" width="160" height="14" fill="url(#orangeGradient)"/>
@@ -231,88 +278,95 @@
   <!-- ==================== Flow Lines ==================== -->
 
   <!-- Browser → Uptime Kuma -->
-  <path d="M 270 200 L 370 200" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 270 200 L 370 200" class="flow-line-teal" stroke="#42b883" stroke-width="3" fill="none" marker-end="url(#arrowTeal)" stroke-linecap="round"/>
-  <text x="320" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#42b883">:7001</text>
+  <path d="M 250 175 L 470 175" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 250 175 L 470 175" class="flow-line-teal" stroke="#42b883" stroke-width="3" fill="none" marker-end="url(#arrowTeal)" stroke-linecap="round"/>
+  <text x="360" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#42b883">:17001</text>
 
-  <!-- Browser → .NET API -->
-  <path d="M 270 230 L 370 380" stroke="#e9d5ff" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 270 230 L 370 380" class="flow-line-purple" stroke="#a855f7" stroke-width="3" fill="none" marker-end="url(#arrowPurple)" stroke-linecap="round"/>
-  <text x="295" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">:5000</text>
+  <!-- WPF → .NET API -->
+  <path d="M 360 415 L 470 415" stroke="#fecdd3" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 360 415 L 470 415" class="flow-line-rose" stroke="#f43f5e" stroke-width="3" fill="none" marker-end="url(#arrowRose)" stroke-linecap="round"/>
+  <text x="415" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#f43f5e">:5000</text>
 
   <!-- Uptime Kuma → .NET API (health poll) -->
-  <path d="M 520 260 L 520 320" stroke="#e9d5ff" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 520 260 L 520 320" class="flow-line-purple" stroke="#a855f7" stroke-width="3" fill="none" marker-end="url(#arrowPurple)" stroke-linecap="round"/>
-  <text x="555" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">GET /health</text>
+  <path d="M 620 260 L 620 320" stroke="#e9d5ff" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 620 260 L 620 320" class="flow-line-purple" stroke="#a855f7" stroke-width="3" fill="none" marker-end="url(#arrowPurple)" stroke-linecap="round"/>
+  <text x="655" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">GET /health</text>
 
   <!-- .NET API → Postgres HealthCheck -->
-  <path d="M 440 580 L 400 630" stroke="#bfdbfe" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 440 580 L 400 630" class="flow-line-blue" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowBlue)" stroke-linecap="round"/>
+  <path d="M 540 580 L 510 660" stroke="#bfdbfe" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 540 580 L 510 660" class="flow-line-blue" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowBlue)" stroke-linecap="round"/>
 
   <!-- .NET API → Redis HealthCheck -->
-  <path d="M 520 580 L 600 630" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 520 580 L 600 630" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
+  <path d="M 620 580 L 700 660" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 620 580 L 700 660" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
 
   <!-- .NET API → API HealthCheck -->
-  <path d="M 600 580 L 770 630" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 600 580 L 770 630" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
+  <path d="M 700 580 L 880 660" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 700 580 L 880 660" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
 
   <!-- ServiceDefaults → .NET API -->
-  <path d="M 760 390 L 670 420" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 760 390 L 670 420" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
-  <text x="715" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#f97316">Shared Config</text>
+  <path d="M 860 390 L 770 420" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 860 390 L 770 420" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
+  <text x="815" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#f97316">Shared Config</text>
 
   <!-- AppHost → .NET API -->
-  <path d="M 900 220 L 900 280 L 660 340" stroke="#bfdbfe" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 900 220 L 900 280 L 660 340" class="flow-line-blue" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowBlue)" stroke-linecap="round"/>
-  <text x="830" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#3b82f6">Orchestrates</text>
+  <path d="M 1000 220 L 1000 280 L 770 340" stroke="#bfdbfe" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 1000 220 L 1000 280 L 770 340" class="flow-line-blue" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowBlue)" stroke-linecap="round"/>
+  <text x="940" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#3b82f6">Orchestrates</text>
 
   <!-- ==================== Process Description ==================== -->
-  <g transform="translate(50, 640)">
+  <g transform="translate(50, 600)">
     <rect x="0" y="0" width="270" height="160" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
     <text x="135" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">数据流程 / Data Flow</text>
 
     <g transform="translate(15, 38)">
-      <circle cx="8" cy="8" r="6" fill="#0ea5e9"/>
-      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">1. 浏览器访问 API / Uptime Kuma</text>
+      <circle cx="8" cy="8" r="6" fill="#f43f5e"/>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">1. WPF 客户端连接 API</text>
     </g>
     <g transform="translate(15, 58)">
-      <circle cx="8" cy="8" r="6" fill="#42b883"/>
-      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">2. Kuma 定时轮询 /health</text>
+      <circle cx="8" cy="8" r="6" fill="#0ea5e9"/>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">2. 浏览器访问 API / Kuma</text>
     </g>
     <g transform="translate(15, 78)">
-      <circle cx="8" cy="8" r="6" fill="#a855f7"/>
-      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">3. API 执行 Health Checks</text>
+      <circle cx="8" cy="8" r="6" fill="#42b883"/>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">3. Kuma 定时轮询 /health</text>
     </g>
     <g transform="translate(15, 98)">
-      <circle cx="8" cy="8" r="6" fill="#f97316"/>
-      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">4. /simulate 模拟故障/恢复</text>
+      <circle cx="8" cy="8" r="6" fill="#a855f7"/>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">4. API 执行 Health Checks</text>
     </g>
     <g transform="translate(15, 118)">
+      <circle cx="8" cy="8" r="6" fill="#f97316"/>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">5. /simulate 模拟故障/恢复</text>
+    </g>
+    <g transform="translate(15, 138)">
       <circle cx="8" cy="8" r="6" fill="#3b82f6"/>
-      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">5. Kuma 检测状态变化并告警</text>
+      <text x="22" y="12" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">6. Kuma 检测变化并告警</text>
     </g>
   </g>
 
   <!-- ==================== Legend ==================== -->
-  <g transform="translate(940, 640)">
+  <g transform="translate(1040, 670)">
     <rect x="0" y="0" width="230" height="160" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
     <text x="115" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#64748b">图例 / LEGEND</text>
 
-    <rect x="15" y="38" width="24" height="14" rx="3" fill="#0ea5e9"/>
-    <text x="48" y="50" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Client / 客户端</text>
+    <rect x="15" y="38" width="24" height="14" rx="3" fill="#f43f5e"/>
+    <text x="48" y="50" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Desktop / 桌面</text>
 
-    <rect x="15" y="60" width="24" height="14" rx="3" fill="#42b883"/>
-    <text x="48" y="72" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Monitor / 监控</text>
+    <rect x="15" y="60" width="24" height="14" rx="3" fill="#0ea5e9"/>
+    <text x="48" y="72" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Client / 客户端</text>
 
-    <rect x="15" y="82" width="24" height="14" rx="3" fill="#a855f7"/>
-    <text x="48" y="94" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">API / 接口</text>
+    <rect x="15" y="82" width="24" height="14" rx="3" fill="#42b883"/>
+    <text x="48" y="94" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Monitor / 监控</text>
 
-    <rect x="15" y="104" width="24" height="14" rx="3" fill="#3b82f6"/>
-    <text x="48" y="116" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Storage / 存储</text>
+    <rect x="15" y="104" width="24" height="14" rx="3" fill="#a855f7"/>
+    <text x="48" y="116" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">API / 接口</text>
 
-    <rect x="15" y="126" width="24" height="14" rx="3" fill="#f97316"/>
-    <text x="48" y="138" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Process / 处理</text>
+    <rect x="15" y="126" width="24" height="14" rx="3" fill="#3b82f6"/>
+    <text x="48" y="138" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Storage / 存储</text>
+
+    <rect x="120" y="38" width="24" height="14" rx="3" fill="#f97316"/>
+    <text x="153" y="50" font-family="Arial, sans-serif" font-size="10" fill="#1e293b">Process</text>
   </g>
 
 </svg>

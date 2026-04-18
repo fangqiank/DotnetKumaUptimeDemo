@@ -47,6 +47,12 @@ app.UseHttpsRedirection();
 
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = 200,
+        [HealthStatus.Degraded] = 503,
+        [HealthStatus.Unhealthy] = 503
+    },
     ResponseWriter = async (context, report) =>
     {
         context.Response.ContentType = "application/json";

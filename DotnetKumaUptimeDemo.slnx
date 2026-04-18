@@ -4,5 +4,6 @@
   </Folder>
   <Project Path="DotnetKumaUptimeDemo.AppHost/DotnetKumaUptimeDemo.AppHost.csproj" />
   <Project Path="DotnetKumaUptimeDemo.ServiceDefaults/DotnetKumaUptimeDemo.ServiceDefaults.csproj" />
+  <Project Path="DotnetKumaUptimeDemo.Wpf/DotnetKumaUptimeDemo.Wpf.csproj" />
   <Project Path="DotnetKumaUptimeDemo/DotnetKumaUptimeDemo.csproj" />
 </Solution>

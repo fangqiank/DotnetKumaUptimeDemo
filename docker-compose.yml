@@ -19,7 +19,7 @@ services:
     image: louislam/uptime-kuma:2
     container_name: uptime-kuma
     ports:
-      - "7001:3001"
+      - "17001:3001"
     volumes:
       - uptime-kuma-data:/app/data
     environment:
