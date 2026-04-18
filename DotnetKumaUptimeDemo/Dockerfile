@@ -14,7 +14,6 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["nuget.config", "nuget.config"]
 COPY ["DotnetKumaUptimeDemo/DotnetKumaUptimeDemo.csproj", "DotnetKumaUptimeDemo/"]
-COPY ["DotnetKumaUptimeDemo.ServiceDefaults/DotnetKumaUptimeDemo.ServiceDefaults.csproj", "DotnetKumaUptimeDemo.ServiceDefaults/"]
 RUN dotnet restore "./DotnetKumaUptimeDemo/DotnetKumaUptimeDemo.csproj"
 COPY . .
 WORKDIR "/src/DotnetKumaUptimeDemo"

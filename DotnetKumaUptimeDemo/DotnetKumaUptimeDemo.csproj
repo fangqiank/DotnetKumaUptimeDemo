@@ -16,8 +16,4 @@
     <PackageReference Include="StackExchange.Redis" Version="2.12.14" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DotnetKumaUptimeDemo.ServiceDefaults\DotnetKumaUptimeDemo.ServiceDefaults.csproj" />
-  </ItemGroup>
-
 </Project>

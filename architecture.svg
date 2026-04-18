@@ -202,48 +202,6 @@
     <text x="140" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">port 8080</text>
   </g>
 
-  <!-- ==================== ServiceDefaults ==================== -->
-  <g transform="translate(860, 330)">
-    <rect x="0" y="0" width="280" height="120" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#orangeGradient)"/>
-    <rect x="0" y="20" width="280" height="15" fill="url(#orangeGradient)"/>
-    <text x="140" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">ServiceDefaults / 共享配置</text>
-
-    <g transform="translate(15, 45)">
-      <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
-      <text x="57" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f97316">OpenTelemetry</text>
-      <text x="57" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Metrics + Traces</text>
-      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Logging</text>
-    </g>
-    <g transform="translate(150, 45)">
-      <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
-      <text x="57" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f97316">Resilience</text>
-      <text x="57" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Service Discovery</text>
-      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Health Checks</text>
-    </g>
-  </g>
-
-  <!-- ==================== AppHost ==================== -->
-  <g transform="translate(860, 100)">
-    <rect x="0" y="0" width="280" height="120" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
-    <rect x="0" y="0" width="280" height="35" rx="12" fill="url(#blueGradient)"/>
-    <rect x="0" y="20" width="280" height="15" fill="url(#blueGradient)"/>
-    <text x="140" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Aspire AppHost / 编排器</text>
-
-    <g transform="translate(15, 45)">
-      <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
-      <text x="57" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#3b82f6">Orchestration</text>
-      <text x="57" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Service Lifecycle</text>
-      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Dev Time</text>
-    </g>
-    <g transform="translate(150, 45)">
-      <rect x="0" y="0" width="115" height="55" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
-      <text x="57" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#3b82f6">Dashboard</text>
-      <text x="57" y="33" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Aspire UI</text>
-      <text x="57" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">Service Map</text>
-    </g>
-  </g>
-
   <!-- ==================== Health Check Components ==================== -->
   <!-- Postgres -->
   <g transform="translate(450, 670)">
@@ -303,16 +261,6 @@
   <!-- .NET API → API HealthCheck -->
   <path d="M 700 580 L 880 660" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
   <path d="M 700 580 L 880 660" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
-
-  <!-- ServiceDefaults → .NET API -->
-  <path d="M 860 390 L 770 420" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 860 390 L 770 420" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
-  <text x="815" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#f97316">Shared Config</text>
-
-  <!-- AppHost → .NET API -->
-  <path d="M 1000 220 L 1000 280 L 770 340" stroke="#bfdbfe" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 1000 220 L 1000 280 L 770 340" class="flow-line-blue" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowBlue)" stroke-linecap="round"/>
-  <text x="940" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#3b82f6">Orchestrates</text>
 
   <!-- ==================== Process Description ==================== -->
   <g transform="translate(50, 600)">

@@ -35,20 +35,12 @@ dotnet run --project DotnetKumaUptimeDemo.Wpf
 
 Connects to API at `http://localhost:5000`. Auto-refreshes every 5 seconds.
 
-### Aspire Orchestration
-
-```bash
-dotnet run --project DotnetKumaUptimeDemo.AppHost
-```
-
 ## Project Structure
 
 | Project | Description |
 |---------|-------------|
 | **DotnetKumaUptimeDemo** | Main web API with health checks and simulation endpoints |
 | **DotnetKumaUptimeDemo.Wpf** | WPF desktop dashboard (MVVM, auto-refresh) |
-| **DotnetKumaUptimeDemo.AppHost** | .NET Aspire orchestrator |
-| **DotnetKumaUptimeDemo.ServiceDefaults** | Shared service defaults (OpenTelemetry, resilience, service discovery) |
 
 ## API Endpoints
 
@@ -76,7 +68,6 @@ dotnet run --project DotnetKumaUptimeDemo.AppHost
 
 - .NET 10 / ASP.NET Core / WPF
 - CommunityToolkit.Mvvm (MVVM)
-- .NET Aspire 13.1
 - Scalar (API documentation)
 - StackExchange.Redis / Npgsql
 - OpenTelemetry
