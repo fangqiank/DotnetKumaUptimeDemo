@@ -6,18 +6,72 @@
         xmlns:vm="clr-namespace:DotnetKumaUptimeDemo.Wpf.ViewModels"
         xmlns:conv="clr-namespace:DotnetKumaUptimeDemo.Wpf.Converters"
         mc:Ignorable="d"
-        Title="DotnetKumaUptimeDemo Dashboard" Height="600" Width="900"
+        Title="DotnetKumaUptimeDemo Dashboard" Height="680" Width="960"
+        Background="#f2f1ed"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <conv:HealthStatusToBrushConverter x:Key="StatusBrush"/>
+        <conv:HealthStatusToForegroundConverter x:Key="StatusFg"/>
         <BooleanToVisibilityConverter x:Key="BoolVis"/>
+
+        <!-- Cursor-inspired button style -->
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Background" Value="#e6e5e0"/>
+            <Setter Property="Foreground" Value="#26251e"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#cf2d56"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Failure button style -->
+        <Style x:Key="FailureButton" TargetType="Button" BasedOn="{StaticResource ActionButton}">
+            <Setter Property="Background" Value="#f2f1ed"/>
+            <Setter Property="Foreground" Value="#cf2d56"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#26251e"/>
+                    <Setter Property="Background" Value="#cf2d56"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Recover button style -->
+        <Style x:Key="RecoverButton" TargetType="Button" BasedOn="{StaticResource ActionButton}">
+            <Setter Property="Background" Value="#f2f1ed"/>
+            <Setter Property="Foreground" Value="#1f8a65"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#26251e"/>
+                    <Setter Property="Background" Value="#1f8a65"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
 
-    <Grid Margin="16">
+    <Grid Margin="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,8 +79,26 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="DotnetKumaUptime" FontFamily="Consolas" FontSize="22"
+                               Foreground="#26251e" Margin="0,0,0,2"/>
+                    <TextBlock Text="Dashboard" FontFamily="Georgia" FontSize="13"
+                               Foreground="#a1a09b"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Refresh" Command="{Binding RefreshCommand}"
+                        Style="{StaticResource ActionButton}" FontSize="13" Padding="14,8"/>
+            </Grid>
+        </StackPanel>
+
         <!-- Overall Status Bar -->
-        <Border Grid.Row="0" CornerRadius="8" Padding="12,8" Margin="0,0,0,12"
+        <Border Grid.Row="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,16"
                 Background="{Binding OverallStatus, Converter={StaticResource StatusBrush}}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,24 +106,25 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Overall Status:" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,8,0"/>
-                    <TextBlock Text="{Binding OverallStatus}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="Overall" FontFamily="Georgia" FontSize="14" Foreground="#ffffff" Margin="0,0,12,0"
+                               Opacity="0.8"/>
+                    <TextBlock Text="{Binding OverallStatus}" FontFamily="Consolas" FontSize="16"
+                               Foreground="#ffffff" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Duration:" Foreground="White" Margin="0,0,4,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding TotalDuration, StringFormat={}{0:F1}ms}" Foreground="White" VerticalAlignment="Center"/>
-                    <Button Content="Refresh" Command="{Binding RefreshCommand}" Margin="16,0,0,0"
-                            Padding="12,4" Background="#33FFFFFF" Foreground="White" BorderThickness="0"/>
+                    <TextBlock Text="{Binding TotalDuration, StringFormat={}{0:F1}ms}" FontFamily="Consolas"
+                               FontSize="12" Foreground="#ffffff" Opacity="0.8" VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>
 
         <!-- Error Message -->
-        <TextBlock Grid.Row="1" Text="{Binding ErrorMessage}" Foreground="Red" Margin="0,0,0,8"
+        <TextBlock Grid.Row="1" Text="{Binding ErrorMessage}" FontFamily="Consolas" FontSize="11"
+                   Foreground="#cf2d56" Margin="0,52,0,0"
                    Visibility="{Binding ErrorMessage.Length, Converter={StaticResource BoolVis}}"/>
 
         <!-- Component Cards -->
-        <ItemsControl Grid.Row="2" ItemsSource="{Binding Checks}" Margin="0,0,0,12">
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding Checks}" Margin="0,0,0,16">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"/>
@@ -59,40 +132,51 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="8" Margin="4" Padding="12"
-                            BorderThickness="2"
-                            BorderBrush="{Binding Status, Converter={StaticResource StatusBrush}}">
+                    <Border CornerRadius="8" Margin="6" Padding="16"
+                            Background="#e6e5e0"
+                            BorderThickness="1"
+                            BorderBrush="#d5d4cf">
                         <StackPanel>
                             <!-- Component Name -->
-                            <TextBlock Text="{Binding Component}" FontSize="16" FontWeight="Bold"
-                                       HorizontalAlignment="Center" Margin="0,0,0,4"/>
-                            <!-- Status Badge -->
-                            <Border CornerRadius="4" Padding="8,4" HorizontalAlignment="Center" Margin="0,0,0,8"
-                                    Background="{Binding Status, Converter={StaticResource StatusBrush}}">
-                                <TextBlock Text="{Binding Status}" Foreground="White" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Component}" FontFamily="Consolas" FontSize="15"
+                                       Foreground="#26251e" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+
+                            <!-- Status Pill -->
+                            <Border CornerRadius="9999" Padding="12,4" HorizontalAlignment="Center" Margin="0,0,0,12"
+                                    Background="#f2f1ed">
+                                <TextBlock Text="{Binding Status}" FontFamily="Consolas" FontSize="11"
+                                           Foreground="{Binding Status, Converter={StaticResource StatusFg}}"
+                                           HorizontalAlignment="Center"/>
                             </Border>
+
                             <!-- Description -->
-                            <TextBlock Text="{Binding Description}" FontSize="11" TextWrapping="Wrap"
-                                       Foreground="#64748b" Margin="0,0,0,8" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Description}" FontFamily="Georgia" FontSize="11" TextWrapping="Wrap"
+                                       Foreground="#8a897f" Margin="0,0,0,12" HorizontalAlignment="Center"
+                                       LineHeight="16"/>
+
                             <!-- Data -->
-                            <ItemsControl ItemsSource="{Binding Data}" FontSize="10" Margin="0,0,0,8">
+                            <ItemsControl ItemsSource="{Binding Data}" FontSize="10" Margin="0,0,0,12">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Foreground="#94a3b8">
-                                            <Run Text="{Binding Key, Mode=OneWay}"/>:
-                                            <Run Text="{Binding Value, Mode=OneWay}"/>
-                                        </TextBlock>
+                                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                                            <TextBlock Text="{Binding Key, Mode=OneWay}" FontFamily="Consolas"
+                                                       Foreground="#a1a09b" FontSize="10"/>
+                                            <TextBlock Text=":" FontFamily="Consolas" Foreground="#d5d4cf" FontSize="10" Margin="2,0"/>
+                                            <TextBlock Text="{Binding Value, Mode=OneWay}" FontFamily="Consolas"
+                                                       Foreground="#26251e" FontSize="10"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <!-- Simulate Buttons -->
+
+                            <!-- Action Buttons -->
                             <UniformGrid Columns="2" Margin="0,4,0,0">
-                                <Button Content="Simulate Failure" Margin="2" Padding="4"
-                                        FontSize="10" Background="#ef4444" Foreground="White" BorderThickness="0"
+                                <Button Content="Fail" Margin="0,0,4,0"
+                                        Style="{StaticResource FailureButton}" FontSize="11" Padding="6,5"
                                         Command="{Binding DataContext.SimulateFailureCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding Component}"/>
-                                <Button Content="Recover" Margin="2" Padding="4"
-                                        FontSize="10" Background="#22c55e" Foreground="White" BorderThickness="0"
+                                <Button Content="Recover" Margin="4,0,0,0"
+                                        Style="{StaticResource RecoverButton}" FontSize="11" Padding="6,5"
                                         Command="{Binding DataContext.SimulateRecoveryCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding Component}"/>
                             </UniformGrid>
@@ -104,16 +188,20 @@
 
         <!-- Bottom Panel: Users + Service Info -->
         <UniformGrid Grid.Row="3" Columns="2" Rows="1">
-            <Border CornerRadius="8" Margin="4" Padding="12" Background="#f8fafc" BorderThickness="1" BorderBrush="#e2e8f0">
+            <Border CornerRadius="8" Margin="6" Padding="16" Background="#e6e5e0"
+                    BorderThickness="1" BorderBrush="#d5d4cf">
                 <StackPanel>
-                    <TextBlock Text="Users" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
-                    <TextBlock Text="{Binding UsersText}" FontSize="11" Foreground="#475569"/>
+                    <TextBlock Text="Users" FontFamily="Consolas" FontSize="12" Foreground="#26251e" Margin="0,0,0,8"/>
+                    <TextBlock Text="{Binding UsersText}" FontFamily="Georgia" FontSize="11" Foreground="#8a897f"
+                               LineHeight="16"/>
                 </StackPanel>
             </Border>
-            <Border CornerRadius="8" Margin="4" Padding="12" Background="#f8fafc" BorderThickness="1" BorderBrush="#e2e8f0">
+            <Border CornerRadius="8" Margin="6" Padding="16" Background="#e6e5e0"
+                    BorderThickness="1" BorderBrush="#d5d4cf">
                 <StackPanel>
-                    <TextBlock Text="Service Info" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
-                    <TextBlock Text="{Binding ServiceInfoText}" FontSize="11" Foreground="#475569"/>
+                    <TextBlock Text="Service" FontFamily="Consolas" FontSize="12" Foreground="#26251e" Margin="0,0,0,8"/>
+                    <TextBlock Text="{Binding ServiceInfoText}" FontFamily="Georgia" FontSize="11" Foreground="#8a897f"
+                               LineHeight="16"/>
                 </StackPanel>
             </Border>
         </UniformGrid>

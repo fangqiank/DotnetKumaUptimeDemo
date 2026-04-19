@@ -3,12 +3,13 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Scalar.AspNetCore;
 using StackExchange.Redis;
 using System.Text.Json;
+using DotnetKumaUptimeDemo.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ApiHealthCheck>();
 builder.Services.AddHealthChecks()
-    .AddCheck<PostgresHealthCheck>("postgres", tags: new[] { "db" })
+    .AddCheck<PostgresHealthCheck>("postgres", tags: new[] { "database" })
     .AddCheck<RedisHealthCheck>("redis", tags: new[] { "cache" })
     .AddCheck<ApiHealthCheck>("api", tags: new[] { "core" });
 
@@ -134,79 +135,3 @@ app.MapPost("/api/simulate/recovery", (string component) =>
 });
 
 app.Run();
-
-public class ApiHealthCheck : IHealthCheck
-{
-    private static bool _simulateFailure = false;
-    public static void SimulateFailure(bool fail) => _simulateFailure = fail;
-    public bool IsHealthy() => !_simulateFailure;
-    public static bool IsHealthyStatic() => !_simulateFailure;
-    public Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context, 
-        CancellationToken cancellationToken = default)
-    {
-        if (_simulateFailure)
-        {
-            return Task.FromResult(HealthCheckResult.Unhealthy(
-                "API is unhealthy: dependency chain broken"
-            ));
-        }
-
-        return Task.FromResult(HealthCheckResult.Healthy("API is operational"));
-    }
-}
-
-public class RedisHealthCheck : IHealthCheck
-{
-    private static bool _simulateFailure = false;
-    public static void SimulateFailure(bool fail) => _simulateFailure = fail;
-    public Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context, 
-        CancellationToken cancellationToken = default)
-    {
-        if (_simulateFailure)
-        {
-            return Task.FromResult(HealthCheckResult.Degraded(
-                "Redis connection slow: 5000ms response time",
-                data: new Dictionary<string, object> { { "latency_ms", 5000 } }
-            ));
-        }
-
-        return Task.FromResult(HealthCheckResult.Healthy(
-            "Redis is healthy",
-            data: new Dictionary<string, object>
-            {
-                { "latency_ms", Random.Shared.Next(1, 10) },
-                { "memory_usage_mb", Random.Shared.Next(50, 200) }
-            }
-        ));
-    }
-}
-
-public class PostgresHealthCheck : IHealthCheck
-{
-    private static bool _simulateFailure = false;
-
-    public static void SimulateFailure(bool fail) => _simulateFailure = fail;
-    public Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context, 
-        CancellationToken cancellationToken = default)
-    {
-        if (_simulateFailure)
-        {
-            return Task.FromResult(HealthCheckResult.Unhealthy(
-                "PostgreSQL connection failed: timeout after 30s",
-                data: new Dictionary<string, object> { { "error_code", "DB_TIMEOUT" } }
-            ));
-        }
-
-        return Task.FromResult(HealthCheckResult.Healthy(
-            "PostgreSQL is healthy",
-            data: new Dictionary<string, object>
-            {
-                { "latency_ms", Random.Shared.Next(5, 50) },
-                { "connections", Random.Shared.Next(10, 100) }
-            }
-        ));
-    }
-}
