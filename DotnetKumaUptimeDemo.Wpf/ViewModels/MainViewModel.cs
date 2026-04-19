@@ -34,7 +34,7 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
-        _api = new ApiService();
+        _api = new ApiService(App.Configuration);
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
         _timer.Tick += async (_, _) =>
         {

@@ -1,6 +1,7 @@
-using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Http;
 using DotnetKumaUptimeDemo.Wpf.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace DotnetKumaUptimeDemo.Wpf.Services;
 
@@ -8,15 +9,17 @@ public class ApiService
 {
     private readonly HttpClient _http;
 
-    public ApiService(string baseUrl = "http://localhost:5000")
+    public ApiService(IConfiguration? configuration = null)
     {
+        var baseUrl = Environment.GetEnvironmentVariable("API_BASE_URL")
+            ?? configuration?["Api:BaseUrl"]
+            ?? "http://localhost:5000";
         _http = new HttpClient { BaseAddress = new Uri(baseUrl) };
     }
 
     public async Task<HealthCheckResponse?> GetHealthAsync()
     {
         var resp = await _http.GetAsync("/health");
-        // 503 (Unhealthy) still has JSON body we need to parse
         if (resp.StatusCode != System.Net.HttpStatusCode.OK
             && resp.StatusCode != System.Net.HttpStatusCode.ServiceUnavailable)
             return null;
